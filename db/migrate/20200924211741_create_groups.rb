@@ -18,7 +18,7 @@ class CreateGroups < ActiveRecord::Migration[6.0]
       t.integer :long_tasks
       t.integer :short_tasks
       t.integer :creator_id
-      t.integer :user_id
+      t.integer :user_id, :default => nil
       t.string :skill_level
       t.boolean :mic_required
       t.integer :player_limit

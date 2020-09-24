@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post '/login', to: 'auth#create'
       get '/users', to: 'users#index'
       get '/profile', to: 'users#profile'
+      resources :groups
     end
   end
 end
