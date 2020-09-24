@@ -1,0 +1,47 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  map: MyString
+  num_of_impostors: 1
+  confirm_ejects: false
+  num_of_meetings: 1
+  em_cd: 1
+  discussion_time: 1
+  voting_time: 1
+  player_speed: 1.5
+  crew_vis: 1.5
+  impos_vision: 1.5
+  kill_cd: 1
+  kill_distance: MyString
+  visual_tasks: false
+  common_tasks: 1
+  long_tasks: 1
+  short_tasks: 1
+  creator_id: 1
+  user_id: 1
+  skill_level: MyString
+  mic_required: false
+  player_limit: 1
+
+two:
+  map: MyString
+  num_of_impostors: 1
+  confirm_ejects: false
+  num_of_meetings: 1
+  em_cd: 1
+  discussion_time: 1
+  voting_time: 1
+  player_speed: 1.5
+  crew_vis: 1.5
+  impos_vision: 1.5
+  kill_cd: 1
+  kill_distance: MyString
+  visual_tasks: false
+  common_tasks: 1
+  long_tasks: 1
+  short_tasks: 1
+  creator_id: 1
+  user_id: 1
+  skill_level: MyString
+  mic_required: false
+  player_limit: 1
