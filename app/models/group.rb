@@ -1,10 +1,11 @@
 class Group < ApplicationRecord
-    has_many :users
-    belongs_to :creator, foreign_key: :creator_id, class_name: 'User'
+    belongs_to :creator, class_name: "User"
+    has_many :members, through: :memberships, source: :user
+    has_many :memberships
     validate :validates_user_count
 
     def validates_user_count
-        if self.users.all > 9 
+        if self.members.length > 9 
             errors.add(:users, "Room is full.")
         end
     end 
