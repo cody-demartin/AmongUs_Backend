@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-    skip_before_action :authorized, only: [:create]
+    # skip_before_action :authorized, only: [:create]
 
     def index 
         users = User.all
@@ -11,9 +11,9 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def create
-        user = User.create(user_params)
-        if user.valid? 
-            render json: { user: UserSerializer.new(user) }, status: :created
+        @user = User.create(user_params)
+        if @user.valid?
+            render json: { user: UserSerializer.new(@user) }, status: :created
         else 
             render json: { error: 'failed to create' }, status: :not_acceptable
         end
@@ -22,6 +22,6 @@ class Api::V1::UsersController < ApplicationController
     private 
 
     def user_params
-        params.require(:user).permit(:username, :password, :avatar, :discord)
+        params.require(:user).permit!
     end
 end
