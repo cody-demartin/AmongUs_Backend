@@ -1,7 +1,7 @@
 require 'byebug'
 
 class Api::V1::UsersController < ApplicationController
-    # skip_before_action :authorized, only: [:create]
+    skip_before_action :authorized, only: [:create]
 
     def index 
         users = User.all
@@ -27,4 +27,5 @@ class Api::V1::UsersController < ApplicationController
     def user_params
         params.require(:user).permit(:username, :password, :avatar, :discord)
     end
+    
 end
