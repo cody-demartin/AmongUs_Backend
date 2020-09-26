@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get '/users', to: 'users#index'
       get '/profile', to: 'users#profile'
       resources :groups
+      resources :memberships
     end
   end
 end

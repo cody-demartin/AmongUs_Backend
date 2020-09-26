@@ -3,6 +3,7 @@ class Group < ApplicationRecord
     has_many :memberships
     has_many :members, through: :memberships, source: :user
     validate :validates_user_count
+    # accepts_nested_attributes_for :members, allow_destroy: true
 
     def validates_user_count
         if self.members.length > 9 
