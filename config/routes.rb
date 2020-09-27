@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :groups
   namespace :api do
     namespace :v1 do
       resources :users
@@ -8,6 +7,7 @@ Rails.application.routes.draw do
       get '/profile', to: 'users#profile'
       resources :groups
       resources :memberships
+      mount ActionCable.server => '/cable'
     end
   end
 end

@@ -7,9 +7,14 @@ class Api::V1::MembershipsController < ApplicationController
 
     def create
         membership = Membership.new(membership_params)
+        group = Group.find(membership_params[:group_id])
         if membership.valid?
             membership.save
-            render json: {membership: membership}, status: :created
+            serialized_data = ActiveModelSerializers::Adapter::Json.new(
+                MembershipSerializer.new(membership)
+            ).serializable_hash
+            MembershipsChannel.broadcast_to group, serialized_data
+            head :ok
         else
             render json: {error: "not accepted"}, status: :not_acceptable
         end
