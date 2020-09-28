@@ -13,7 +13,7 @@ class Api::V1::MembershipsController < ApplicationController
             serialized_data = ActiveModelSerializers::Adapter::Json.new(
                 MembershipSerializer.new(membership)
             ).serializable_hash
-            MembershipsChannel.broadcast_to group, serialized_data
+            # MembershipsChannel.broadcast_to group, serialized_data
             head :ok
         else
             render json: {error: "not accepted"}, status: :not_acceptable

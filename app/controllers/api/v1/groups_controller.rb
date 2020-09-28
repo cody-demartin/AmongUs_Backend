@@ -1,9 +1,32 @@
+require 'byebug'
+
 class Api::V1::GroupsController < ApplicationController
 
     def index
         groups = Group.all 
         render json: groups 
+
+        if groups
+            serialized_data = ActiveModelSerializers::Adapter::Json.new(GroupSerializer.new(groups)).serializable_hash
+            ActionCable.server.broadcast 'group_channel', serialized_data
+            byebug
+            head :ok
+        else
+            render json: {error: "not accepted"}, status: :not_acceptable
+        end
     end
+
+    # def show
+    #     group = Group.find(id: params[:id])
+    #     byebug
+    #     if group
+    #         serialized_data = ActiveModelSerializers::Adapter::Json.new(GroupSerializer.new(group)).serializable_hash
+    #         ActionCable.server.broadcast 'group_channel', serialized_data
+    #             head :ok
+    #     else
+    #         render json: {error: "not accepted"}, status: :not_acceptable
+    #     end
+    # end
 
     def create
         group = Group.new(group_params)
@@ -19,6 +42,8 @@ class Api::V1::GroupsController < ApplicationController
             render json: {error: "not accepted"}, status: :not_acceptable
         end
     end
+
+
 
     private
 
