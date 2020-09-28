@@ -1,4 +1,4 @@
-require 'byebug'
+# require 'byebug'
 # class MembershipsChannel < ApplicationCable::Channel
 #   def subscribed
 #     group = Group.find(params[:group])

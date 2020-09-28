@@ -13,6 +13,8 @@ class Api::V1::MembershipsController < ApplicationController
             serialized_data = ActiveModelSerializers::Adapter::Json.new(
                 MembershipSerializer.new(membership)
             ).serializable_hash
+            ActionCable.server.broadcast 'group_channel', serialized_data
+
             # MembershipsChannel.broadcast_to group, serialized_data
             head :ok
         else
