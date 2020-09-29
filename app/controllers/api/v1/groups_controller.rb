@@ -43,6 +43,23 @@ class Api::V1::GroupsController < ApplicationController
         end
     end
 
+    def destroy
+        group = Group.find(params[:id])
+        group.delete
+
+        groups = Group.all 
+        
+        # groups.map do |group|
+        #     serialized_data = ActiveModelSerializers::Adapter::Json.new(GroupSerializer.new(group)).serializable_hash
+        #     ActionCable.server.broadcast 'delete_channel', serialized_data
+        #     head :ok
+        # end
+
+        serialized_data = ActiveModelSerializers::Adapter::Json.new(GroupSerializer.new(group)).serializable_hash
+        ActionCable.server.broadcast 'delete_channel', serialized_data
+        head :ok
+    end
+
     private
 
     def group_params
