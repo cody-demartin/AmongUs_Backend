@@ -14,8 +14,7 @@ class Api::V1::MembershipsController < ApplicationController
                 MembershipSerializer.new(membership)
             ).serializable_hash
             ActionCable.server.broadcast 'group_channel', serialized_data
-
-            # MembershipsChannel.broadcast_to group, serialized_data
+            
             head :ok
         else
             render json: {error: "not accepted"}, status: :not_acceptable
@@ -24,9 +23,16 @@ class Api::V1::MembershipsController < ApplicationController
 
     def destroy
         membership = Membership.find(params[:id])
-        membership.delete
+        if membership
+            membership.delete
+            serialized_data = ActiveModelSerializers::Adapter::Json.new(
+                MembershipSerializer.new(membership)
+            ).serializable_hash
+            ActionCable.server.broadcast 'memberships_channel', serialized_data
+        else
+            render json: {error: "couldn't find the membership"}
+        end
 
-        
     end
 
     private
