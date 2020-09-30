@@ -22,6 +22,13 @@ class Api::V1::MembershipsController < ApplicationController
         end
     end
 
+    def destroy
+        membership = Membership.find(params[:id])
+        membership.delete
+
+        
+    end
+
     private
 
     def membership_params
