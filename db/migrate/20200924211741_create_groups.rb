@@ -20,6 +20,7 @@ class CreateGroups < ActiveRecord::Migration[6.0]
       t.string :skill_level
       t.boolean :mic_required
       t.integer :player_limit
+      t.string :game_code
 
       t.references :creator
 

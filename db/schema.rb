@@ -32,13 +32,14 @@ ActiveRecord::Schema.define(version: 2020_09_25_151738) do
     t.integer "common_tasks"
     t.integer "long_tasks"
     t.integer "short_tasks"
-    t.integer "creator_id"
-    t.integer "user_id"
     t.string "skill_level"
     t.boolean "mic_required"
     t.integer "player_limit"
+    t.string "game_code"
+    t.bigint "creator_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["creator_id"], name: "index_groups_on_creator_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -51,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_151738) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.string "avatar"
+    t.string "avatar", default: "https://img.icons8.com/ultraviolet/40/000000/among-us.png"
     t.string "discord"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

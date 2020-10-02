@@ -4,5 +4,5 @@ class User < ApplicationRecord
     has_many :groups, through: :memberships
     has_secure_password
     
-    validates :username, uniqueness: true
+    validates :username, uniqueness: true, length: { maximum: 10 }
 end

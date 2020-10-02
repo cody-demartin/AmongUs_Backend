@@ -5,8 +5,6 @@ class Group < ApplicationRecord
     validate :validates_user_count
     validates :creator_id, uniqueness: true
 
-    # accepts_nested_attributes_for :members, allow_destroy: true
-
     def validates_user_count
         if self.members.length > 9 
             errors.add(:users, "Room is full.")
